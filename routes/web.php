@@ -12,5 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+
+Route::get('/blogs','BlogController@index');
+
+Route::post('/blogs','BlogController@store');
+
+Route::get('/blogs/{blog}','BlogController@show');
