@@ -20,3 +20,9 @@ Route::get('/blogs','BlogController@index');
 Route::post('/blogs','BlogController@store');
 
 Route::get('/blogs/{blog}','BlogController@show');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('categories','CategoriesController');
