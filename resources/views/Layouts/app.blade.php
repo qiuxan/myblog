@@ -84,7 +84,7 @@
                             {{session()->get('success')}}
                         </div>
                     @endif
-                    
+
                     <div class="row">
                         <div class="col-md-4">
                             <ul class="list-group">
@@ -95,7 +95,7 @@
 
                                 <li class="list-group-item">
 
-                                    <a href="">Category</a>
+                                    <a href="{{route('categories.index')}}">Category</a>
                                 </li>
                             </ul>
                         </div>
