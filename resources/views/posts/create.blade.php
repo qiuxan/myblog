@@ -2,25 +2,38 @@
 
 @section('content')
     <div class="card card-default">
-        <div class="card-header">Create A Post</div>
+        <div class="card-header">
+
+            {{isset($post)? 'Edit': 'Create'}} Post</div>
         <div class="card-body">
-            <form action="{{route('posts.store')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{isset($post)?route('posts.update',$post->id):route('posts.store')}}" method="POST" enctype="multipart/form-data">
 
                 {{csrf_field()}}
+
+                @if(isset($post))
+                    @method('PUT')
+                @endif
+
 
                 <div class="form-group">
                     <label for="title">
                         Title
                     </label>
-                    <input type="text" class="form-control" name="title" id="title">
+                    <input type="text" class="form-control" name="title" id="title" value="{{isset($post)?$post->title:''}}">
                 </div>
 
                 <div class="form-group">
                     <label for="description">
                         Description
                     </label>
-                    <textarea cols="5" rows="5" class="form-control" name="description" id="description"></textarea>
+
+
+                    <input id="description" type="hidden" name="description" value="{{isset($post)?$post->description:''}}">
+                    <trix-editor input="description"></trix-editor>
+
                 </div>
+
+
 
                 {{--<div class="form-group">--}}
                     {{--<label for="content">--}}
@@ -33,8 +46,14 @@
                     <label for="published_at">
                         Published At
                     </label>
-                    <input type="text" class="form-control" name="published_at" id="published_at">
+                    <input type="text" class="form-control" name="published_at" id="published_at" value="{{isset($post)?$post->published_at:''}}">
                 </div>
+
+                @if(isset($post))
+                    <div class="form-group">
+                        <img src="{{asset('/storage/'.$post->image)}}" alt="" width="100%">
+                    </div>
+                @endif
 
                 <div class="form-group">
                     <label for="image">
@@ -45,7 +64,7 @@
 
                 <div class="form-group">
                     <button class="btn btn-success" type="submit">
-                        Create Post
+                       {{isset($post)?'Update':'Create'}}Post
                     </button>
                 </div>
 
@@ -53,4 +72,12 @@
             </form>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.0/trix.js"></script>
+@endsection
+
+@section('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.0/trix.css">
 @endsection
