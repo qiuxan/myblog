@@ -7,62 +7,67 @@
     <div class="card card-default">
         <div class="card-header">Categories</div>
         <div class="card-body">
-            <table class="table">
-                <thead>
+
+
+            @if($categories->count()>0)
+                <table class="table">
+                    <thead>
                     <th>Name</th>
                     <th></th>
-                </thead>
+                    </thead>
 
-                <tbody>
-                @foreach($categories as $category)
-                   <tr>
-                        <td>
-                            {{$category->name}}
+                    <tbody>
+                    @foreach($categories as $category)
+                        <tr>
+                            <td>
+                                {{$category->name}}
 
-                        </td>
+                            </td>
 
-                       <td>
-                           <a href="{{route('categories.edit',$category->id)}}" class="btn btn-info btn-sm">Edit</a>
-                            <button class="btn btn-danger btn-sm" onclick="handleDelete({{$category->id}})">Delete</button>
-                       </td>
-                    </tr>
+                            <td>
+                                <a href="{{route('categories.edit',$category->id)}}" class="btn btn-info btn-sm">Edit</a>
+                                <button class="btn btn-danger btn-sm" onclick="handleDelete({{$category->id}})">Delete</button>
+                            </td>
+                        </tr>
 
-                @endforeach
+                    @endforeach
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
 
-            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <form action="" method="POST" id="deleteCategoryForm">
+                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <form action="" method="POST" id="deleteCategoryForm">
 
-                        @csrf
-                        @method('DELETE')
+                            @csrf
+                            @method('DELETE')
 
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="deleteModalLabel">Delete Category</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel">Delete Category</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="text-center text-bold">
+                                        You are deleting a category!
+                                    </p>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Go Back</button>
+                                    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                                </div>
                             </div>
-                            <div class="modal-body">
-                                <p class="text-center text-bold">
-                                    You are deleting a category!
-                                </p>
 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Go Back</button>
-                                <button type="submit" class="btn btn-danger">Yes, Delete</button>
-                            </div>
-                        </div>
+                        </form>
 
-                    </form>
-
+                    </div>
                 </div>
-            </div>
-
+            @else
+                <h3 class="text-center">No Category Yet</h3>
+            @endif
 
 
         </div>

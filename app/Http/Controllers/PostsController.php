@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Posts\CreatePostRequest;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
 {
@@ -16,7 +17,9 @@ class PostsController extends Controller
     public function index()
     {
         //
-        return view('posts.index');
+        $posts=Post::all();
+
+        return view('posts.index',compact('posts'));
     }
 
     /**
@@ -42,7 +45,7 @@ class PostsController extends Controller
 
 //        return 'store';
 //
-        $image = $request->image->store('post');
+        $image = $request->image->store('posts');
         Post::create([
             'title' =>$request->title,
             'description'=> $request->description,
@@ -101,6 +104,34 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
+        $post= Post::withTrashed()->where('id',$id)->firstOrFail();
+
+        if ($post->trashed()){
+
+            Storage::delete($post->image);
+
+            $post->forceDelete();
+        }
+        else{
+            $post->delete();
+        }
+
+        session()->flash('success', 'Post Deleted Successfully');
         //
+        return redirect(route('posts.index'));
+    }
+    /**
+     * Display a listing of the soft deleted posts.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+
+    public function trashed(){
+
+        $trashed= Post::withTrashed()->get();
+
+
+        return view('posts.index')->with('posts',$trashed);
     }
 }
