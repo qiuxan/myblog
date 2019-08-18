@@ -11,22 +11,29 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-
-Route::get('/blogs','BlogController@index');
-
-Route::post('/blogs','BlogController@store');
-
-Route::get('/blogs/{blog}','BlogController@show');
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', function () {return view('home');});
 
-Route::resource('categories','CategoriesController');
-Route::resource('posts','PostsController');
 
-Route::get('trashed-post','PostsController@trashed')->name('trashed-posts.index');
-Route::put('restore-post/{post}','PostsController@restore')->name('restore-post');
+Route::middleware(['auth'])->group(function (){
+
+    Route::get('/blogs','BlogController@index');
+
+    Route::post('/blogs','BlogController@store');
+
+    Route::get('/blogs/{blog}','BlogController@show');
+
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::resource('categories','CategoriesController');
+    Route::resource('posts','PostsController');
+    Route::resource('tags','TagsController');
+    Route::get('trashed-post','PostsController@trashed')->name('trashed-posts.index');
+    Route::put('restore-post/{post}','PostsController@restore')->name('restore-post');
+
+});
+
+
+
+
+

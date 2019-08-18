@@ -2,14 +2,14 @@
 
 @section('content')
     <div class="d-flex justify-content-end mb-2">
-        <a href="{{route('categories.create')}}" class="btn btn-success">Add Category</a>
+        <a href="{{route('tags.create')}}" class="btn btn-success">Add Tag</a>
     </div>
     <div class="card card-default">
-        <div class="card-header">Categories</div>
+        <div class="card-header">Tags</div>
         <div class="card-body">
 
 
-            @if($categories->count()>0)
+            @if($tags->count()>0)
                 <table class="table">
                     <thead>
                     <th>Name</th>
@@ -18,20 +18,21 @@
                     </thead>
 
                     <tbody>
-                    @foreach($categories as $category)
+                    @foreach($tags as $tag)
                         <tr>
                             <td>
-                                {{$category->name}}
+                                {{$tag->name}}
 
                             </td>
 
                             <td>
-                                {{$category->posts->count()}}
+                                0
+                                {{--{{$tag->posts->count()}}--}}
                             </td>
 
                             <td>
-                                <a href="{{route('categories.edit',$category->id)}}" class="btn btn-info btn-sm">Edit</a>
-                                <button class="btn btn-danger btn-sm" onclick="handleDelete({{$category->id}})">Delete</button>
+                                <a href="{{route('tags.edit',$tag->id)}}" class="btn btn-info btn-sm">Edit</a>
+                                <button class="btn btn-danger btn-sm" onclick="handleDelete({{$tag->id}})">Delete</button>
                             </td>
                         </tr>
 
@@ -56,7 +57,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <p class="text-center text-bold">
-                                        You are deleting a category!
+                                        You are deleting a tag!
                                     </p>
 
                                 </div>
@@ -71,7 +72,7 @@
                     </div>
                 </div>
             @else
-                <h3 class="text-center">No Category Yet</h3>
+                <h3 class="text-center">No Tags Yet</h3>
             @endif
 
 
@@ -84,10 +85,10 @@
         function handleDelete(id) {
 
 
-           var form =document.getElementById('deleteCategoryForm')
-            form.action='/categories/'+id;
-           $('#deleteModal').modal('show');
+            var form =document.getElementById('deleteCategoryForm')
+            form.action='/tags/'+id;
+            $('#deleteModal').modal('show');
         }
-        
+
     </script>
 @endsection

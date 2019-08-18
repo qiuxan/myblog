@@ -16,6 +16,7 @@
                 <thead>
                     <th>Image</th>
                     <th>Title</th>
+                    <th>Category</th>
                     <th></th>
                     <th></th>
                 </thead>
@@ -27,6 +28,15 @@
                                 </td>
                             <td>
                                 {{$post->title}}
+                            </td>
+
+                            <td>
+
+                                @if(isset($post->category))
+                                    <a href="{{route("categories.edit",$post->category_id)}}">{{$post->category->name}}</a>
+                                @endif
+
+
                             </td>
 
                             @if($post->trashed())

@@ -6,6 +6,7 @@
 
             {{isset($post)? 'Edit': 'Create'}} Post</div>
         <div class="card-body">
+            @include('partials.errors')
             <form action="{{isset($post)?route('posts.update',$post->id):route('posts.store')}}" method="POST" enctype="multipart/form-data">
 
                 {{csrf_field()}}
@@ -60,6 +61,25 @@
                         Image
                     </label>
                     <input type="file" class="form-control" name="image" id="image">
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select name="category" id="category" class="form-control">
+
+                        @foreach($categories as $category)
+                            <option value="{{$category->id}}"
+
+                                @if(isset($post))
+                                    @if($category->id===$post->category_id)
+                                        selected
+                                    @endif
+                                @endif
+
+                            >{{$category->name}}</option>
+                        @endforeach
+
+                    </select> 
                 </div>
 
                 <div class="form-group">
