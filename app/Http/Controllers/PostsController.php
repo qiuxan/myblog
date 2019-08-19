@@ -6,6 +6,7 @@ use App\Category;
 use App\Http\Requests\Posts\CreatePostRequest;
 use App\Http\Requests\Posts\UpdatePostRequest;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -38,7 +39,7 @@ class PostsController extends Controller
     {
         //
 
-        return view('posts.create')->with('categories',Category::all());
+        return view('posts.create')->with('categories',Category::all())->with('tags',Tag::all());
     }
 
     /**
@@ -50,16 +51,20 @@ class PostsController extends Controller
     public function store(CreatePostRequest $request)
     {
 
-//        return 'store';
-//
+//        dd($request->all());
         $image = $request->image->store('posts');
-        Post::create([
+        $post= Post::create([
             'title' =>$request->title,
             'description'=> $request->description,
             'image'=>$image,
             'category_id'=>$request->category
 
         ]);
+
+        if ($request->tags){
+
+            $post->tags()->attach($request->tags);
+        }
 //
         session()->flash('success', 'Post Create Successfully');
 //
@@ -89,7 +94,7 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.create')->with('post',$post)->with('categories',Category::all());
+        return view('posts.create')->with('post',$post)->with('categories',Category::all())->with('tags',Tag::all());
         //
     }
 
@@ -118,6 +123,11 @@ class PostsController extends Controller
             $data['image']= $image;
         }
 
+        if ($request->tags){
+
+            $post->tags()->sync($request->tags);
+        }
+
         $post->update($data);
 
         session()->flash('success','Post updated successfully');
@@ -133,6 +143,7 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
+
         $post= Post::withTrashed()->where('id',$id)->firstOrFail();
 
         if ($post->trashed()){

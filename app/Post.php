@@ -14,13 +14,34 @@ class Post extends Model
 
     protected $guarded=[];
 
+    /*
+     * @delete the image file from the storage
+     *
+     * */
+
     public function deleteImage(){
 
         Storage::delete($this->image);
     }
 
+    /**
+     *
+     * check if the  post has a tag
+     * @return bool
+     *
+     */
+
+    public function hasTag($tagId){
+        return in_array($tagId,$this->tags->pluck('id')->toArray());
+    }
+
     public function category(){
 
         return $this->belongsTo(Category::class);
+    }
+
+    public function tags(){
+
+        return $this->belongsToMany(Tag::class);
     }
 }
