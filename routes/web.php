@@ -19,6 +19,10 @@ Route::get('/', 'WelcomeController@index')->name('welcome');
 
 Route::get('/post/{post}',[PostsController::class,'show'])->name('blog.show');
 
+Route::get('/category/{category}',[PostsController::class,'category'])->name('blog.category');
+
+Route::get('/tag/{tag}',[PostsController::class,'tag'])->name('blog.tag');
+
 
 Route::middleware(['auth'])->group(function (){
 
