@@ -27,7 +27,7 @@ class CreatePostRequest extends FormRequest
 //
             'title'=>'required|unique:posts',
             'description'=>'required',
-            'image'=>'required|image',
+            'image'=>'required|image|max:500',
             'category'=>'required',
         ];
     }

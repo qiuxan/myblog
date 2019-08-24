@@ -3,20 +3,22 @@
 
 @section('title')
 
-    My Blog
+    澳洲龙岩同乡会
 
 @endsection
 
 @section('header')
 
-    <header class="header text-center text-white" style="background-image: linear-gradient(-225deg, #5D9FFF 0%, #B8DCFF 48%, #6BBBFF 100%);">
+    <header class="header text-center text-white"
+            style="background-image:  url('img/home-bg.jpg');background-position:0% 70%;
+">
         <div class="container">
 
             <div class="row">
                 <div class="col-md-8 mx-auto">
 
-                    <h1>Latest Blog Posts</h1>
-                    <p class="lead-2 opacity-90 mt-6">Read and get updated on how we progress</p>
+                    <h1>澳洲龙岩同乡会</h1>
+                    <p class="lead-2 opacity-90 mt-6">澳洲龙岩同乡会官网</p>
 
                 </div>
             </div>

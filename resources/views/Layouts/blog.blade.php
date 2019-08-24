@@ -9,7 +9,7 @@
     <title>@yield('title')</title>
 
     <!-- Styles -->
-    <link href="{{asset('css/page.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/page.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
 
     <!-- Favicons -->
@@ -36,8 +36,18 @@ favicon.png')}}">
         <section class="navbar-mobile">
             <span class="navbar-divider d-mobile-none"></span>
             <ul class="nav nav-navbar">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('about-page')}}">关于同乡会</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">联系同乡会</a>
+                </li>
+
+
 
             </ul>
+
 
         </section>
 
@@ -70,10 +80,8 @@ favicon.png')}}">
 
             <div class="col-6 col-lg-3 text-right order-lg-last">
                 <div class="social">
-                    <a class="social-facebook" href="https://www.facebook.com/thethemeio"><i class="fa fa-facebook"></i></a>
-                    <a class="social-twitter" href="https://twitter.com/thethemeio"><i class="fa fa-twitter"></i></a>
-                    <a class="social-instagram" href="https://www.instagram.com/thethemeio/"><i class="fa fa-instagram"></i></a>
-                    <a class="social-dribbble" href="https://dribbble.com/thethemeio"><i class="fa fa-dribbble"></i></a>
+                    Web Developed By <label for="qx-git"><a style="display: inline;" href="https://github.com/qiuxan">Ian Qiu</a></label>
+                    <a class="social-git" href="https://github.com/qiuxan" id="qx-git"><i class="fa fa-git"></i></a>
                 </div>
             </div>
 
@@ -84,7 +92,7 @@ favicon.png')}}">
 
 
 <!-- Scripts -->
-<script src="{{asset('js/page.min.js')}}"></script>
+<script src="{{asset('js/page.js')}}"></script>
 <script src="{{asset('js/script.js')}}"></script>
 
 </body>

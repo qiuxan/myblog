@@ -53,6 +53,10 @@ class PostsController extends Controller
 
 //        dd($request->all());
         $image = $request->image->store('posts');
+
+//        dd($image);
+
+
         $post= Post::create([
             'title' =>$request->title,
             'description'=> $request->description,

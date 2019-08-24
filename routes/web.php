@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Blog\PostsController;
+use App\Http\Controllers\Blog\siteInfomationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,9 @@ Route::get('/post/{post}',[PostsController::class,'show'])->name('blog.show');
 Route::get('/category/{category}',[PostsController::class,'category'])->name('blog.category');
 
 Route::get('/tag/{tag}',[PostsController::class,'tag'])->name('blog.tag');
+
+Route::get('/about', [siteInfomationController::class,'about'])->name('about-page');
+
 
 
 Route::middleware(['auth'])->group(function (){
